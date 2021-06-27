@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        "use strict";
+
+        showSum();
+
+        function showSum() {
+            let rubles = Number(prompt("Введите количество денег, которое вы хотите положит на счет"));
+            if (isNaN(rubles)) {
+                alert("Ввод неверный");
+                return;
+            }
+
+            let stringRubles = rubles.toString();
+
+            let lastFigure = stringRubles[stringRubles.length - 1];
+
+            switch (lastFigure) {
+                case "0":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                    showResult(rubles, "рублей");
+                    break;
+                case "1":
+                    showResult(rubles, "рубль");
+                    break;
+                case "2":
+                case "3":
+                case "4":
+                    showResult(rubles, "рубля");
+                    break;
+            }
+        }
+
+        function showResult(rubles, word) {
+            alert("Ваша сумма в " + rubles + " " + word + " успешно зачислена.")
+        }
+    </script>
+</body>
+
+</html>
