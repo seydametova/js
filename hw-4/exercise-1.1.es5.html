@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        'use strict';
+
+        // Функция-конструктор с типом Product и параметрами: name, price
+        function Product(name, price) {
+            // Объекты вызывающие функцию
+            this.name = name;
+            this.price = price;
+        }
+
+        // В прототип функции-конструктора добавляем метод make25PercentDiscount
+        Product.prototype.make25PercentDiscount = function () {
+            // Уменьшаем цену в объекте price на 25%
+            this.price = this.price - (this.price * 25 / 100); // 412.5
+        }
+
+        // Создаем экземпляр типа Product
+        let product1 = new Product('товар1', 550);
+        // Вызываем метод make25PercentDiscount()
+        product1.make25PercentDiscount();
+
+        // Вывод значения product1
+        console.log(product1);
+    </script>
+</body>
+
+</html>
