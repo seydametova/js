@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        'use strict';
+
+        // Создаем функцию-конструктор с типом Post и параметрами: author, text, date
+        function Post(author, text, date) {
+            // Объекты вызывающие функцию
+            this.author = author;
+            this.text = text;
+            this.date = date;
+        }
+
+        // В прототип функции-конструктора добавляем метод edit, который принимает текст 
+        Post.prototype.edit = function (text) {
+            // Записывает текст в св-во text объекта
+            this.text = text;
+        }
+
+        // Создаем экземпляр типа Post с объектами: author, text, date(создается объект Date с текущей датой и временем)
+        let post1 = new Post('Ivan', 'Lorem, ipsum dolor.', new Date());
+        // Выводим значения post1
+        console.log(post1);
+        // Вызываем метод edit с его новым текстом 
+        post1.edit('Velit, ipsam!');
+        // Выводим новое значение post1
+        console.log(post1);
+
+
+
+
+        // Создаем другую сущность с типом AttachedPost
+        function AttachedPost(author, text, date) {
+            // Вызываем конструктор Post через call
+            Post.call(this, author, text, date);
+            // Создаем свойство highlighted со значением false
+            this.highlighted = false;
+        }
+
+        // Тип AttachedPost наследует метод свойства типа Post
+        AttachedPost.prototype = Object.create(Post.prototype);
+        AttachedPost.prototype.constructor = AttachedPost;
+
+        // Создаем собственный метод makeTextHighlighted для типа AttachedPost
+        AttachedPost.prototype.makeTextHighlighted = function () {
+            // Метод makeTextHighlighted назначает свойству highlighted значение true
+            this.highlighted = true;
+        }
+
+        // Создаем экземпляр типа AttachedPost с объектами: author, text, date(создается объект Date с текущей датой и временем)
+        let attachedPost1 = new AttachedPost('Victor', 'Lorem ipsum dolor sit.', new Date());
+        // Выводим значения attachedPost1
+        console.log(attachedPost1);
+        // Вызываем метод makeTextHighlighted()
+        attachedPost1.makeTextHighlighted();
+        // Вызываем метод edit с его новым текстом
+        attachedPost1.edit('Lorem ipsum dolor sit.2');
+        // Выводим новое значение attachedPost1
+        console.log(attachedPost1);
+
+    </script>
+</body>
+
+</html>
